@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>OrderKing | Better Hospitality Service </title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="OrderKing - Automate your restaurant's order system">
+    <meta name="keywords" content="orderking, restaurant, automation, docket, QR order, order transmission, menu setup, real time update, hospitality">
+    <meta name="author" content="OrderKing">
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/favicon-180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <!--link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1"-->
+    <link rel="shortcut icon" href="assets/favicon/favicon-32x32.png">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css"/>
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css"/>
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Theme mode -->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== null && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+    </script>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+  </head>
+
+
+  <!-- Body -->
+  <body>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper">
+
+
+      <!-- Navbar -->
+      <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
+      <header class="header navbar navbar-expand-lg position-absolute navbar-sticky">
+        <div class="container px-3">
+          <a href="index.html" class="navbar-brand pe-3">
+            <img src="assets/img/logo.png" width="47" alt="Silicon">
+            OrderKing
+          </a>
+          <div id="navbarNav" class="offcanvas offcanvas-end">
+            <div class="offcanvas-header border-bottom">
+              <h5 class="offcanvas-title">Menu</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a href="index.html" class="nav-link active" aria-current="page">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="orderking-about.html" class="nav-link ">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="orderking-services.html" class="nav-link ">Features</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+            <input type="checkbox" class="form-check-input" id="theme-mode">
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Light</label>
+            <label class="form-check-label d-none d-sm-block" for="theme-mode">Dark</label>
+          </div>
+          <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!--a href="https://themes.getbootstrap.com/product/silicon-business-technology-template-ui-kit/" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+            <i class="bx bx-cart fs-5 lh-1 me-1"></i>
+            &nbsp;Buy now
+          </a-->
+        </div>
+      </header>
+
+
+      <!-- Hero -->
+      <section class="container py-5 mt-5 mt-md-4 mb-md-3 mb-lg-4 mb-xl-5">
+        <div class="row align-items-center align-items-lg-stretch mb-2 mb-sm-3">
+
+          <!-- Parallax gfx -->
+          <div class="col-xl-7 col-md-6 d-flex justify-content-center justify-content-md-end overflow-hidden order-md-2 mt-n5 mt-sm-n4 mt-md-0">
+            <div class="position-relative mt-5" style="max-width: 660px;">
+              <div class="bg-gradient-primary position-absolute start-0 bottom-0 w-100 rounded-3 opacity-15" style="height: 95%;"></div>
+              <div class="parallax zindex-2">
+                <div class="parallax-layer zindex-2 mb-n3" data-depth="0.1">
+                  <img src="assets/img/landing/orderking/layer01.png" alt="Device">
+                </div>
+                <div class="parallax-layer" data-depth="-0.22">
+                  <img src="assets/img/landing/orderking/layer02.png" alt="Bubble">
+                </div>
+                <div class="parallax-layer" data-depth="0.3">
+                  <img src="assets/img/landing/orderking/layer03.png" alt="Bubble">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="col-xl-5 col-md-6 d-flex flex-column order-md-1">
+            <div class="text-center text-md-start pt-4 pt-sm-5 pt-xl-0 mt-2 mt-sm-0 mt-lg-auto">
+              <h1 class="display-3 mb-4">You could earn more!</h1>
+                <p class="fs-lg mb-0 d-md-none d-xl-block"><b>+Capture the hearts of customers.</b> You'll have more time to focus on providing excellent service to your customers</p>
+                <p class="fs-lg mb-0 d-md-none d-xl-block"><b>+Customer satisfaction.</b> Customers can place orders easily with our high-quality order screens through QR Code.</p>
+                <p class="fs-lg mb-0 d-md-none d-xl-block"><b>+Save your money</b> with no miss order, no paper docket and seamless ordering process</p>
+                <br>
+                <div class="card card-hover">
+                    <div class="card-body pb-3">
+                        <p class="fs-lg mb-0 d-md-none d-xl-block">You can save <mark><b>$10000 + &alpha;</b></mark> with us</p>
+                        <span class="fs-xs text-muted">Labor cost for 50 orders/day, $30/hr(1 min/order) + No docket paper&printer</span>
+                        <span class="fs-xs text-muted">+ Increase table turnover rate + Customer Satisfaction</span>
+                        <br>
+                        <a href="#" class="btn btn-link stretched-link px-0">
+                           Calculate Yours
+                            <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-md-start pt-2 mt-4 mt-md-5">
+                <a href="#" class="btn btn-dark btn-lg px-3 py-2 me-sm-3 me-lg-4 mb-3">
+                  <img src="assets/img/market/appstore-light.svg" class="light-mode-img" width="124" alt="App Store">
+                  <img src="assets/img/market/appstore-dark.svg" class="dark-mode-img" width="124" alt="App Store">
+                </a>
+                <a href="#" class="btn btn-dark btn-lg px-3 py-2 mb-3">
+                  <img src="assets/img/market/googleplay-light.svg" class="light-mode-img" width="139" alt="Google Play">
+                  <img src="assets/img/market/googleplay-dark.svg" class="dark-mode-img" width="139" alt="Google Play">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Stats -->
+      <section class="dark-mode bg-dark  position-relative pt-5 pb-4 py-md-5">
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-secondary"></div>
+        <div class="container position-relative zindex-3 py-lg-4 pt-md-2 py-xl-5 mb-lg-4">
+
+          <!-- Title -->
+          <div class="row justify-content-center text-center pb-4 mb-2">
+            <div class="col-xl-10 pt-2">
+              <h3 class="h1 mb-4">Calculate how much cost you can save with us</h3>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="d-sm-flex flex-wrap d-lg-table w-100 ">
+              <div class="row pb-2">
+                  <div class="col-sm-6 mb-4">
+                      <label for="calculate-fn" class="form-label fs-base">How many orders per day?(count)</label>
+                      <input type="text" id="calculate-fn" class="form-control form-control-lg" value="50" required>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                      <label for="calculate-sn" class="form-label fs-base">How much you pay for labor cost per hour?(AUD$)</label>
+                      <input type="text" id="calculate-sn" class="form-control form-control-lg" value="30" required>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                      <label for="calculate-op" class="form-label fs-base">How many days is your restaurant open per year?(days)</label>
+                      <input type="text" id="calculate-op" class="form-control form-control-lg" value="365" required>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                      <label for="calculate-time" class="form-label fs-base">How much time does it take you to take each order?(second)</label>
+                      <input type="text" id="calculate-time" class="form-control form-control-lg" value="30" required>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                      <label for="calculate-docket" class="form-label fs-base">How much money do you pay to buy docket paper and printer per month?(AUD$)</label>
+                      <input type="text" id="calculate-docket" class="form-control form-control-lg" value="50" required>
+                  </div>
+                  <div class="col-sm-6 mb-4">
+                      <label for="calculate-POS" class="form-label fs-base">How much money do you pay to rent POS per month?($AUD)</label>
+                      <input type="text" id="calculate-POS" class="form-control form-control-lg" value="100" required>
+                  </div>
+              </div>
+              <div class="d-flex mb-3">
+                  <button type="submit" class="btn btn-primary" onclick="calculateFunc(document.getElementById('calculate-fn').value,
+                                    document.getElementById('calculate-sn').value,
+                                    document.getElementById('calculate-op').value,
+                                    document.getElementById('calculate-time').value,
+                                     document.getElementById('calculate-docket').value,
+                                     document.getElementById('calculate-POS').value)">Calculate</button>
+              </div>
+              <div class="row justify-content-center text-left ">
+                  <div class="col-xl-10 pt-2">
+                      <h3 class="h1 ">You can save: <span id="caculateHours">152 </span>hours + $<span id="caculateResult">1800 </span> /year</h3>
+                      <h3 class="h1 ">How much value can you make with this saved time?</h3>
+                      <ul class="list-group">
+                          <li class="list-group-item d-flex align-items-center">
+                              <h3 class="h4 "><i class="bx bx-bowl-hot fs-lg opacity-70 me-2"></i>Investing in providing customers with tastier food</h3>
+                          </li>
+                          <li class="list-group-item d-flex align-items-center">
+                              <h3 class="h4 "><i class="bx bx-loader fs-lg opacity-70 me-2"></i>Investing in creating a cleaner establishment</h3>
+                          </li>
+                          <li class="list-group-item d-flex align-items-center">
+                              <h3 class="h4 "><i class="bx bx-rotate-right fs-lg opacity-70 me-2"></i>Investing in increasing table turnover rate</h3>
+                          </li>
+                          <li class="list-group-item d-flex align-items-center">
+                              <h3 class="h4 "><i class="bx bx-heart fs-lg opacity-70 me-2"></i>Investing in creating more smiles for customers</h3>
+                          </li>
+                          <li class="list-group-item d-flex align-items-center">
+                              <h3 class="h4 "><i class="bx bx-trending-up fs-lg opacity-70 me-2"></i>Creating entirely new value beyond imagination may also be possible</h3>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </section>
+    
+      <section class="container mt-5 mb-5 pb-lg-5 pb-md-4 pb-3 ">
+          <div class="text-center pb-4 mb-3 mx-auto" style="max-width: 530px;">
+              <h2 class="h1">Explore Our Features</h2>
+              <p class="mb-0">we are managing and developing our features persistently in line with our vision of happiness, technology, and freedom.</p>
+          </div>
+        
+        <!-- Project item -->
+        <div class="row gy-4 mb-4 pb-md-3 pb-2">
+            <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+                <div class="bg-secondary rounded-3">
+                    <img src="assets/img/landing/orderking/01.png" alt="Project image">
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+                <div class="align-self-center ps-lg-0 ps-md-4">
+                    <h4 class="mb-lg-4 mb-3 fs-base fw-normal text-body">For your customer</h4>
+                    <h3 class="h2 mb-lg-4 mb-3">High Quality QR Ordering System</h3>
+                    <p class="mb-lg-4 mb-3"><i class="bx bx-check lead text-primary me-2"></i><b>Save time and increase efficiency</b> with our easy-to-use system that lets you <b>focus on your customers</b> without the hassle of taking orders. <br>
+                        <i class="bx bx-check lead text-primary me-2"></i><b>The order screen is the first impression of the store.</b> The quality of the order screen is a reflection of how the store treats its customers.<br>
+                    </p>
+                    <ul class="mb-lg-4 mb-3 fs-sm list-inline" style="max-width: 19.125rem;">
+                        <li class="list-inline-item me-1">
+                            <b>Picture Frame</b>
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            <b>Menu Search</b>
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            <b>Horizontal scrolling</b>
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            <b>My Order</b>
+                        </li>
+                    </ul>
+                    <a href="orderking-services.html" class="btn btn-lg btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project item -->
+        <div class="row gy-4 mb-4 pb-md-3 pb-2">
+            <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+                <div class="bg-secondary rounded-3">
+                    <img-comparison-slider class="mx-n5 mx-xl-0">
+                        <img slot="first" src="assets/img/landing/orderking/orderking-kitchen-dark.png" alt="Dak Mode">
+                        <img slot="second" src="assets/img/landing/orderking/orderking-kitchen-light.png" alt="Light Mode">
+                        <div slot="handle" style="width: 36px;">
+                            <svg class="text-primary shadow-primary rounded-circle" width="36" height="36" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 36 36"><g><circle fill="currentColor" cx="18" cy="18" r="18"/></g><path fill="#fff" d="M22.2,17.2h-8.3v-3.3L9.7,18l4.2,4.2v-3.3h8.3v3.3l4.2-4.2l-4.2-4.2V17.2z"/></svg>
+                        </div>
+                    </img-comparison-slider>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+                <div class="align-self-center ps-lg-0 ps-md-4">
+                    <h4 class="mb-lg-4 mb-3 fs-base fw-normal text-body">For you</h4>
+                    <h3 class="h2 mb-lg-4 mb-3">Efficient kitchen process system</h3>
+                    <p class="mb-lg-4 mb-3">
+                        <i class="bx bx-check lead text-primary me-2"></i><b>Seamless order transmission</b> from customer to kitchen to serving staff, reducing errors and manual communication.<br>
+                        <i class="bx bx-check lead text-primary me-2"></i><b>No dockets. Save your money</b> from docket loss, docket paper, docket printer<br>
+                        <i class="bx bx-check lead text-primary me-2"></i>Don't lose <b>the customer's trust</b> due to a mistake in receiving the order.
+                    </p>
+                    
+                    <ul class="mb-lg-4 mb-3 fs-sm text-muted list-inline" style="max-width: 25.125rem;">
+                        <li class="list-inline-item me-1">
+                            Grouping orders
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            Order elapsed time
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            Reverting order status
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            Easy call a manager
+                        </li>
+                        
+                    </ul>
+                    <a href="orderking-services.html" class="btn btn-lg btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project item -->
+        <div class="row gy-4 mb-xl-3">
+            <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+                <div class="bg-secondary rounded-3">
+                    <img src="assets/img/landing/orderking/admin.png" alt="Project image">
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+                <div class="align-self-center ps-lg-0 ps-md-4">
+                    <h4 class="mb-lg-4 mb-3 fs-base fw-normal text-body">Web App</h4>
+                    <h3 class="h2 mb-lg-4 mb-3">Easy Menu Setup</h3>
+                    <p class="mb-lg-4 mb-3">
+                        <i class="bx bx-check lead text-primary me-2"></i>With the ability to make <b>real-time updates</b>, you can keep your menu up-to-date and provide your customers.<br>
+                        <i class="bx bx-check lead text-primary me-2"></i><b>Automated Description Generation Enhanced by AI</b><br>
+                    </p>
+                    <ul class="mb-lg-4 mb-3 fs-sm text-muted list-inline" style="max-width: 19.125rem;">
+                        <li class="list-inline-item me-1">
+                            User-friendly menu setup
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            Preview mode
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            Automated Description
+                        </li>
+                    </ul>
+                    <a href="orderking-services.html" class="btn btn-lg btn-outline-primary">Read More</a>
+                </div>
+            </div>
+            <br>
+            <div class="bg-secondary position-relative rounded-3 overflow-hidden px-4 px-sm-5">
+                <div class="position-absolute top-50 start-50 w-75 h-75 translate-middle d-flex align-items-center justify-content-center zindex-5">
+                    <a href="https://youtu.be/K3hoMk1yTh4" class="btn btn-video btn-icon btn-xl bg-white stretched-link" data-bs-toggle="video">
+                        <i class="bx bx-play"></i>
+                    </a>
+                </div>
+                <h2 class="h1">How does it work?</h2>
+                <div class="pt-4 mt-sm-3 px-3 px-sm-5 mx-md-5">
+                    <img src="assets/img/landing/orderking/orderking-logo-big.png" width="620" class="rellax d-block mx-auto mt-lg-4" alt="Card" data-rellax-percentage="0.5" data-rellax-speed="1.1" data-disable-parallax-down="lg">
+                </div>
+            </div>
+
+        </div>
+        </section>
+        <section class="container mt-5 mb-5 pb-lg-5 pb-md-4 pb-3 ">
+            <div class="text-center pb-4 mb-3 mx-auto" style="max-width: 530px;">
+                <h2 class="h1">Our customer service</h2>
+                <p class="mb-0">we are managing and developing our features persistently in line with our vision of happiness, technology, and freedom.</p>
+            </div>
+        <div class="row gy-4 mb-xl-3">
+            <div class="col-md-6 rellax" data-rellax-percentage="0.5" data-rellax-speed="0.5" data-disable-parallax-down="md">
+                <div class="bg-secondary rounded-3">
+                    <img src="assets/img/landing/orderking/orderking_customerservice.png" alt="Project image">
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 offset-lg-1 d-flex rellax" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+                <div class="align-self-center ps-lg-0 ps-md-4">
+                    <p class="mb-lg-4 mb-3">
+                        <i class="bx bx-check lead text-primary me-2"></i>Quick inquiry response within 24hrs.<br>
+                        <i class="bx bx-check lead text-primary me-2"></i><b>Problem? Solved in just one week.</b><br>
+                        <i class="bx bx-check lead text-primary me-2"></i>Admin manual<br>
+                    </p>
+                    <ul class="mb-lg-4 mb-3 fs-sm text-muted list-inline" style="max-width: 19.125rem;">
+                        <li class="list-inline-item me-1">
+                            Quick response
+                            <span class="ms-1">/</span>
+                        </li>
+                        <li class="list-inline-item me-1">
+                            a week solution
+                            <span class="ms-1">/</span>
+                        </li>
+                    </ul>
+                    <a href="orderking-services.html" class="btn btn-lg btn-outline-primary">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        </section>
+
+      <!-- Testimonials -->
+      <section class="container py-5 my-1 my-md-4 my-lg-5">
+        <div class="row pt-2 py-xl-3">
+          <div class="col-lg-3 col-md-4">
+            <h2 class="h1 text-center text-md-start mx-auto mx-md-0 pb-3 pb-sm-4 pb-md-0 pt-md-2" style="max-width: 300px;">What <br class="d-none d-md-inline">People Say <br class="d-none d-md-inline">About App:</h2>
+
+            <!-- Slider controls (Prev / next buttons) -->
+          </div>
+          <div class="col-lg-9 col-md-8">
+            <div>
+              <div class="swiper-wrapper">
+                <!-- Item -->
+                <div class="swiper-slide h-auto pt-4">
+                  <figure class="d-flex flex-column h-100 px-2 px-sm-0 mb-0 mx-2">
+                    <div class="card h-100 position-relative border-0 shadow-sm pt-4">
+                      <span class="btn btn-icon btn-primary shadow-primary pe-none position-absolute top-0 start-0 translate-middle-y ms-4">
+                        <i class="bx bxs-quote-left"></i>
+                      </span>
+                      <blockquote class="card-body pb-3 mb-0">
+                        <p class="mb-0">The QR code-based ordering system has made a significant impact on our restaurant experience. It's incredibly efficient, and we appreciate how it has reduced human error in our orders. We're also thrilled with the cost savings, as we no longer need to print docket or allocate as much staff time to order taking. Most importantly, it has made the customer experience more seamless and enjoyable. We highly recommend this innovative system!</p>
+                      </blockquote>
+                      <div class="card-footer border-0 text-nowrap pt-0">
+                        <i class="bx bxs-star text-warning"></i>
+                        <i class="bx bxs-star text-warning"></i>
+                        <i class="bx bxs-star text-warning"></i>
+                        <i class="bx bxs-star text-warning"></i>
+                        <i class="bx bxs-star text-warning"></i>
+                      </div>
+                    </div>
+                    <figcaption class="ps-4 pt-4">
+                      <h6 class="fs-sm fw-semibold mb-0">Mr, Song</h6>
+                      <span class="fs-xs text-muted">GangnamStyle Korean Restaurant</span>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <!-- Pagination (bullets) -->
+            </div>
+          </div>
+        </div>
+      </section>
+    
+    
+        <section class="container" id="contactus">
+            <div class="position-relative bg-dark rounded-3 overflow-hidden py-5 px-4 px-sm-0">
+                <span class="position-absolute top-0 start-0 d-block w-100 h-100" style="background: radial-gradient(116.18% 118% at 50% 100%, rgba(99, 102, 241, 0.1) 0%, rgba(218, 70, 239, 0.05) 41.83%, rgba(241, 244, 253, 0.07) 82.52%);"></span>
+                <div class="position-relative row justify-content-center py-sm-2 py-lg-5">
+                    <div class="col-xl-6 col-lg-7 col-md-8 col-sm-10 text-center">
+                        <h2 class="h1 text-light mb-4">Ready to Get Started?</h2>
+                        <p class="fs-lg text-light opacity-70 pb-4 mb-3">Write your email address so we can contact you</p>
+                    
+                        <!-- Desktop form -->
+                        <form class="input-group input-group-lg d-none d-sm-flex needs-validation mb-3" novalidate>
+                            <input type="email" id="emailaddress" class="form-control rounded-start ps-5" placeholder="Your email" required>
+                            <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                            <div class="invalid-tooltip position-absolute top-100 start-0">Please provide a valid email address.</div>
+                            <button class="btn btn-primary" onclick="callAPIContactUS(document.getElementById('emailaddress').value)">Get in touch</button>
+                        </form>
+                    
+                        <!-- Mobile form -->
+                        <form class="needs-validation d-sm-none mb-3" novalidate>
+                            <div class="position-relative mb-3">
+                                <input type="email" id="emailaddress-validate" class="form-control form-control-lg rounded-start ps-5" placeholder="Your email" required>
+                                <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                                <div class="invalid-tooltip position-absolute top-0 start-0 mt-n4">Please provide a valid email address.</div>
+                            </div>
+                            <button class="btn btn-primary btn-lg w-100" onclick="callAPIContactUS(document.getElementById('emailaddress-validate').value)">Get in touch</button>
+                        </form>
+                        <p class="fs-sm text-light opacity-50 mb-0">No subscriptions. No annual fees. No lock-ins.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+      <!-- Info links -->
+      <!--section class="container pt-5 pb-4 pb-sm-5 mb-2 mb-sm-0 mb-lg-3 mb-xl-4 mt-md-2 mt-lg-4 mt-xl-5">
+        <div class="row row-cols-1 row-cols-sm-3 pt-sm-3 py-2">
+          <div class="col d-flex d-sm-block d-lg-flex align-items-start mb-3 mb-sm-0">
+            <div class="d-table bg-primary shadow-primary rounded flex-shrink-0 p-2 mb-3">
+              <img src="assets/img/landing/app-showcase/icons/chat.svg" width="24" class="d-block m-1" alt="Icon">
+            </div>
+            <div class="ps-4 ps-sm-0 ps-lg-4 ms-lg-2 me-xl-2 pe-xl-5">
+              <h3 class="h4 mb-2 mb-md-3">Document</h3>
+              <p class="mb-1 mb-md-2">Find manual.</p>
+              <a href="#" class="btn btn-link px-0">
+                Talk to us
+                <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col d-flex d-sm-block d-lg-flex align-items-start mb-3 mb-sm-0">
+            <div class="d-table bg-primary shadow-primary rounded flex-shrink-0 p-2 mb-3">
+              <img src="assets/img/landing/app-showcase/icons/faq.svg" width="24" class="d-block m-1" alt="Icon">
+            </div>
+            <div class="ps-4 ps-sm-0 ps-lg-4 ms-lg-2 pe-xl-5">
+              <h3 class="h4 mb-2 mb-md-3">FAQ</h3>
+              <p class="mb-1 mb-md-2">Find answers. Learn more about the features and services.</p>
+              <a href="#" class="btn btn-link px-0">
+                Learn more
+                <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col d-flex d-sm-block d-lg-flex align-items-start">
+            <div class="d-table bg-primary shadow-primary rounded flex-shrink-0 p-2 mb-3">
+              <img src="assets/img/landing/app-showcase/icons/email.svg" width="24" class="d-block m-1" alt="Icon">
+            </div>
+            <div class="ps-4 ps-sm-0 ps-lg-4 ms-lg-2 pe-xl-5">
+              <h3 class="h4 mb-2 mb-md-3">Email</h3>
+              <p class="mb-1 mb-md-2">Please feel free to drop any questions to our email.</p>
+              <a href="#" class="btn btn-link px-0">
+                Drop us a line
+                <i class="bx bx-right-arrow-alt fs-xl ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section-->
+
+
+      <!-- Divider -->
+      <div class="container mb-md-2 mb-lg-4"><hr></div>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer pt-5 pb-4 pb-lg-5">
+        <div class="container pt-lg-4">
+            <div class="row pb-5">
+                <div class="col-lg-4 col-md-6">
+                    <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+                        <img src="assets/img/logo.png" width="47" alt="OrderKing">
+                        OrderKing
+                    </div>
+                    <p class="fs-sm pb-lg-3 mb-4">Create happiness by developing innovative technologies and empowering our clients to achieve their goals and attain benefits.</p>
+                </div>
+                <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
+                    <div id="footer-links" class="row">
+                        <div class="col-lg-4">
+                            <h6 class="mb-2">
+                                <a href="#useful-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Useful Links</a>
+                            </h6>
+                            <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                                <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">About Us</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Features</a></li>
+                                </ul>
+                                <!--ul class="nav flex-column mb-2 mb-lg-0">
+                                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Terms &amp; Conditions</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Privacy Policy</a></li>
+                                </ul-->
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-3">
+                            <h6 class="mb-2">
+                                <a href="#social-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Socials</a>
+                            </h6>
+                            <!--div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                              <ul class="nav flex-column mb-2 mb-lg-0">
+                                <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Facebook</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">LinkedIn</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Twitter</a></li>
+                              </ul>
+                            </div-->
+                        </div>
+                        <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
+                            <h6 class="mb-2">Contact Us</h6>
+                            <a href="orderking.corp@gmail.com" class="fw-medium">orderking.corp@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+                <span class="text-dark opacity-50">&copy; All rights reserved. Made by </span>
+                <a class="nav-link d-inline-block p-0" href="https://www.sevenwhale.com" target="_blank" rel="noopener">SevenWhale</a>
+            </p>
+        </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/parallax-js/dist/parallax.min.js"></script>
+    <script src="assets/vendor/rellax/rellax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/img-comparison-slider/dist/index.js"></script>
+    <script src="assets/js/src/components/jquery.min.js"></script>
+    <script src="assets/js/src/components/orderking.js"></script>
+    
+    <!-- Main Theme Script -->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>

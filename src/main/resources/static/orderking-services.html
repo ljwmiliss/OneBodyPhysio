@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <title>OrderKing | Better Hospitality Service </title>
+
+    <!-- SEO Meta Tags -->
+      <meta name="description" content="OrderKing - Automate your restaurant's order system">
+      <meta name="keywords" content="orderking, restaurant, automation, docket, QR order, order transmission, menu setup, real time update, hospitality">
+      <meta name="author" content="OrderKing">
+    
+      <!-- Viewport -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+      <!-- Favicon and Touch Icons -->
+      <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/favicon-180.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+      <link rel="manifest" href="assets/favicon/site.webmanifest">
+      <!--link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#6366f1"-->
+      <link rel="shortcut icon" href="assets/favicon/favicon-32x32.png">
+      <meta name="msapplication-TileColor" content="#080032">
+      <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+      <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="assets/vendor/boxicons/css/boxicons.min.css"/>
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css"/>
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #0b0f19;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Theme mode -->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== null && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+    </script>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+  </head>
+
+
+  <!-- Body -->
+  <body>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+
+
+    <!-- Page wrapper for sticky footer -->
+    <!-- Wraps everything except footer to push footer to the bottom of the page if there is little content -->
+    <main class="page-wrapper position-relative zindex-2">
+
+
+      <!-- Navbar -->
+      <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page -->
+        <header class="header navbar navbar-expand-lg position-absolute navbar-sticky">
+            <div class="container px-3">
+                <a href="index.html" class="navbar-brand pe-3">
+                    <img src="assets/img/logo.png" width="47" alt="Silicon">
+                    OrderKing
+                </a>
+                <div id="navbarNav" class="offcanvas offcanvas-end">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title">Menu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link " aria-current="page">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="orderking-about.html" class="nav-link ">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="orderking-services.html" class="nav-link active">Features</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-check form-switch mode-switch pe-lg-1 ms-auto me-4" data-bs-toggle="mode">
+                    <input type="checkbox" class="form-check-input" id="theme-mode">
+                    <label class="form-check-label d-none d-sm-block" for="theme-mode">Light</label>
+                    <label class="form-check-label d-none d-sm-block" for="theme-mode">Dark</label>
+                </div>
+                <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--a href="https://themes.getbootstrap.com/product/silicon-business-technology-template-ui-kit/" class="btn btn-primary btn-sm fs-sm rounded d-none d-lg-inline-flex" target="_blank" rel="noopener">
+                  <i class="bx bx-cart fs-5 lh-1 me-1"></i>
+                  &nbsp;Buy now
+                </a-->
+            </div>
+        </header>
+
+      <div class="bg-secondary pt-5" style="padding-bottom: 228px;">
+  
+        <!-- Breadcrumb -->
+        <nav class="container pt-5 pb-4 mb-lg-2" aria-label="breadcrumb">
+          <ol class="breadcrumb pt-lg-3 mb-0">
+            <li class="breadcrumb-item">
+              <a href="index.html"><i class="bx bx-home-alt fs-lg me-1"></i>Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Services</li>
+          </ol>
+        </nav>
+    
+          <section class="container mb-md-3 mb-lg-5 pb-5">
+              <div class="row">
+                  <div class="col-md-6 pb-2 pb-md-0 mb-4 mb-md-0">
+                      <div class="pe-lg-5">
+                          <img src="assets/img/services/orderking/pictureframe.png" class="rounded-3" alt="Image">
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <h2 class="h3 mb-sm-4">Great first impression of your restaurant</h2>
+                      <p class="d-md-none d-xl-block pb-2 pb-md-3 mb-3">
+                           Our high-quality order screens takes responsibility for your customers' satisfaction by providing clean, modern and professional order screen.
+                      </p>
+                      <div class="border rounded-3 mb-4 mb-lg-5">
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <img src="assets/img/services/icons/digital.svg" width="48" alt="Icon">
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Gain a great first impression</h3>
+                                      <p class="fs-xs mb-0">Don't worry about making your food picture-perfect; Our picture Frame Technology will do the job for you.</p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <img src="assets/img/services/icons/chart.svg" width="48" alt="Icon">
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">User-friendly order screen</h3>
+                                      <p class="fs-xs mb-0">Impress your customers from the start with a sleek and user-friendly order screen that enhances their experience and makes ordering a breeze.</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <figure class="position-relative ps-4">
+                          <span class="position-absolute top-0 start-0 w-3 h-100 bg-primary"></span>
+                          <blockquote class="blockquote fs-sm fw-medium text-dark ps-1 ps-sm-3">
+                              <p>Customers were more satisfied when servers had a neat and clean appearance, a professional demeanor, and attire that was appropriate to the type of restaurant. The study also found that the appearance of the server had a greater impact on customer satisfaction than other factors such as food quality, price, and restaurant atmosphere.
+                          </blockquote>
+                          <figcaption class="d-flex align-items-center pt-3 ps-1 ps-sm-3">
+                              <div class="ps-3">
+                                  <span class="fs-sm text-muted">Jang, S., Kageyama, Y., & Pearce, E. A. (2019). The impact of restaurant server's appearance on customer satisfaction. Journal of Hospitality and Tourism Management, 40, 62-71. doi:10.1016/j.jhtm.2019.06.007</span>
+                              </div>
+                          </figcaption>
+                      </figure>
+                  </div>
+              </div>
+          </section>
+          <section class="container pt-2 pt-lg-3 mb-md-3 mb-lg-5 pb-5">
+              <div class="row">
+                  <div class="col-md-6 order-md-2 pb-2 pb-md-0 mb-4 mb-md-0">
+                      <div class="position-relative mx-auto mx-md-0" style="max-width: 462px;">
+                          <img src="assets/img/services/orderking/horizantal_slide.png" class="rellax d-block" alt="Screen" data-rellax-percentage="0.5" data-rellax-speed="-0.5" data-disable-parallax-down="md">
+                          <div class="rellax position-absolute top-0 end-0 w-100 h-100 me-md-n3" data-rellax-percentage="0.5" data-rellax-speed="0.75" data-disable-parallax-down="md">
+                              <img src="assets/img/services/orderking/searchFunction.png" alt="Screen">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 ordr-md-1">
+                      <h2 class="h3 mb-sm-4">High customer service level</h2>
+                      <ul class="list-unstyled d-md-none d-xl-block pb-2 pb-md-3 mb-3">
+                          <li class="d-flex align-items-center mb-2">
+                              You can gain satisfaction from happy customers who appreciate the level of care and attention you put into their experience.
+                          </li>
+                      </ul>
+                      <div class="border rounded-3 mb-4 mb-lg-5">
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <img src="assets/img/services/icons/orderking/043-stopwatch.svg" width="32" alt="Icon">
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Search</h3>
+                                      <p class="fs-xs mb-0">With our user-friendly search function, your customers can quickly and easily navigate your menu
+                                          </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="95" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M2 2h2v20H2z"></path><rect x="6" y="13" width="16" height="6" rx="1"></rect><rect x="6" y="5" width="12" height="6" rx="1"></rect></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Horizontal Scrolling</h3>
+                                      <p class="fs-xs mb-0">Our user-friendly design ensures that your customers can quickly and easily browse through your menu without having to endlessly scroll down the screen.</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M19.045 7.401c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.378-.378-.88-.586-1.414-.586s-1.036.208-1.413.585L4 13.585V18h4.413L19.045 7.401zm-3-3 1.587 1.585-1.59 1.584-1.586-1.585 1.589-1.584zM6 16v-1.585l7.04-7.018 1.586 1.586L7.587 16H6zm-2 4h16v2H4z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Description</h3>
+                                      <p class="fs-xs mb-0">
+                                          With our AI-generated descriptions, we can help your customers make informed and confident ordering decisions.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <div class="ps-2 ms-1">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <figure class="position-relative ps-4">
+                          <span class="position-absolute top-0 start-0 w-3 h-100 bg-primary"></span>
+                          <blockquote class="blockquote fs-sm fw-medium text-dark ps-1 ps-sm-3">
+                              <p>Lee, Lee, and Koo (2017) found that customers prefer simple and easy-to-use menu interfaces with low visual complexity and information load, while McCall and Lynn (2008) determined that providing detailed descriptions of menu items positively influences customers' food choices and satisfaction levels.
+                          </blockquote>
+                          <figcaption class="d-flex align-items-center pt-3 ps-1 ps-sm-3">
+                              <div class="ps-3">
+                                  <span class="fs-sm text-muted">Lee, J. E., Lee, J., & Koo, C. (2017). Menu interface design and users' attitudes toward mobile ordering systems for restaurants. International Journal of Hospitality Management, 66, 1-10. doi: 10.1016/j.ijhm.2017.06.006.
+                                    <br>
+                                    McCall, M., & Lynn, M. (2008). Descriptive menu item information and customer ordering decisions in restaurants. Journal of Hospitality & Tourism Research, 32(3), 387-404. doi: 10.1177/1096348008314928.</span>
+                              </div>
+                          </figcaption>
+                      </figure>
+                  </div>
+              </div>
+          </section>
+        <!-- Page title + Services grid -->
+          <section class="container pt-2 pt-lg-3 mb-md-3 mb-lg-5 pb-5">
+              <div class="row">
+                  <div class="col-md-12 ordr-md-1">
+                      <h2 class="h3 mb-sm-4">Seamless kitchen process system</h2>
+                      <div class="col-md-12 pb-2 pb-md-0 mb-4 mb-md-0">
+                          <div>
+                              <img src="assets/img/services/orderking/kitchenautomation.png" class="rounded-3" alt="Image">
+                          </div>
+                      </div>
+                      <div class="border rounded-3 mb-4 mb-lg-5">
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M3 2h2v20H3zm7 4h7v2h-7zm0 4h7v2h-7z"></path><path d="M19 2H6v20h13c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 18H8V4h11v16z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Grouping Menu</h3>
+                                      <p class="fs-xs mb-0">Save your cooking time with ease by quickly identifying orders with the same types of food.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M16.57 22a2 2 0 0 0 1.43-.59l2.71-2.71a1 1 0 0 0 0-1.41l-4-4a1 1 0 0 0-1.41 0l-1.6 1.59a7.55 7.55 0 0 1-3-1.59 7.62 7.62 0 0 1-1.59-3l1.59-1.6a1 1 0 0 0 0-1.41l-4-4a1 1 0 0 0-1.41 0L2.59 6A2 2 0 0 0 2 7.43 15.28 15.28 0 0 0 6.3 17.7 15.28 15.28 0 0 0 16.57 22zM6 5.41 8.59 8 7.3 9.29a1 1 0 0 0-.3.91 10.12 10.12 0 0 0 2.3 4.5 10.08 10.08 0 0 0 4.5 2.3 1 1 0 0 0 .91-.27L16 15.41 18.59 18l-2 2a13.28 13.28 0 0 1-8.87-3.71A13.28 13.28 0 0 1 4 7.41zM20 11h2a8.81 8.81 0 0 0-9-9v2a6.77 6.77 0 0 1 7 7z"></path><path d="M13 8c2.1 0 3 .9 3 3h2c0-3.22-1.78-5-5-5z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Call Manager</h3>
+                                      <p class="fs-xs mb-0">Manage your kitchen with ease by having the ability to quickly call your manager for any necessary support.</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M9 10h6c1.654 0 3 1.346 3 3s-1.346 3-3 3h-3v2h3c2.757 0 5-2.243 5-5s-2.243-5-5-5H9V5L4 9l5 4v-3z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Undo</h3>
+                                      <p class="fs-xs mb-0">
+                                          You can quickly correct any mistakes and ensure smooth kitchen operations.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm5 12H7v-4h10v4z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Out Of Stock</h3>
+                                      <p class="fs-xs mb-0">Avoid any potential shortages by quickly marking items as sold out.</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="40" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M12.25 2c-5.514 0-10 4.486-10 10s4.486 10 10 10 10-4.486 10-10-4.486-10-10-10zM18 13h-6.75V6h2v5H18v2z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">New Order by time&table </h3>
+                                      <p class="fs-xs mb-0">
+                                          Easily manage orders from the same table by choosing to either consolidate them into a single electronic docket or keep them separate.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M12 15c-1.84 0-2-.86-2-1H8c0 .92.66 2.55 3 2.92V18h2v-1.08c2-.34 3-1.63 3-2.92 0-1.12-.52-3-4-3-2 0-2-.63-2-1s.7-1 2-1 1.39.64 1.4 1h2A3 3 0 0 0 13 7.12V6h-2v1.09C9 7.42 8 8.71 8 10c0 1.12.52 3 4 3 2 0 2 .68 2 1s-.62 1-2 1z"></path><path d="M5 2H2v2h2v17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V4h2V2H5zm13 18H6V4h12z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Split Payment</h3>
+                                      <p class="fs-xs mb-0">Splitting the food bill is made easy with our system.</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z"></path><path d="M7 14.987v1.999h1.999l5.529-5.522-1.998-1.998zm8.47-4.465-1.998-2L14.995 7l2 1.999z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Update customer order</h3>
+                                      <p class="fs-xs mb-0">
+                                          Our system allows managers to easily modify customer orders.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M21 11h-3V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v14c0 1.654 1.346 3 3 3h14c1.654 0 3-1.346 3-3v-6a1 1 0 0 0-1-1zM5 19a1 1 0 0 1-1-1V5h12v13c0 .351.061.688.171 1H5zm15-1a1 1 0 0 1-2 0v-5h2v5z"></path><path d="M6 7h8v2H6zm0 4h8v2H6zm5 4h3v2h-3z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Electronic Receipt</h3>
+                                      <p class="fs-xs mb-0">Our platform allows for easy issuance of electronic receipts</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="35" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M20 7h-4V4c0-1.103-.897-2-2-2h-4c-1.103 0-2 .897-2 2v5H4c-1.103 0-2 .897-2 2v9a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V9c0-1.103-.897-2-2-2zM4 11h4v8H4v-8zm6-1V4h4v15h-4v-9zm10 9h-4V9h4v10z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Statistics</h3>
+                                      <p class="fs-xs mb-0">
+                                          detailed statistics and analytics on a monthly, weekly, and yearly basis, allowing you to track your business growth and make informed decisions.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <section class="container pt-2 pt-lg-3 mb-md-3 mb-lg-5 pb-5">
+              <div class="row">
+                  <div class="col-md-12 ordr-md-1">
+                      <h2 class="h3 mb-sm-4">Easy Menu Setup</h2>
+                          <div>
+                              <img src="assets/img/landing/orderking/admin_features.png" class="rounded-3" alt="Image">
+                          </div>
+                      <div class="border rounded-3 mb-4 mb-lg-5">
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="35" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M7.08 11.25A4.84 4.84 0 0 1 8 9.05L4.43 5.49A9.88 9.88 0 0 0 2 11.25zM9.05 8a4.84 4.84 0 0 1 2.2-.91V2a9.88 9.88 0 0 0-5.76 2.43zm3.7-6v5A4.84 4.84 0 0 1 15 8l3.56-3.56A9.88 9.88 0 0 0 12.75 2zM8 15a4.84 4.84 0 0 1-.91-2.2H2a9.88 9.88 0 0 0 2.39 5.76zm3.25 1.92a4.84 4.84 0 0 1-2.2-.92l-3.56 3.57A9.88 9.88 0 0 0 11.25 22zM16 9.05a4.84 4.84 0 0 1 .91 2.2h5a9.88 9.88 0 0 0-2.39-5.76zM15 16a4.84 4.84 0 0 1-2.2.91v5a9.88 9.88 0 0 0 5.76-2.39zm1.92-3.25A4.84 4.84 0 0 1 16 15l3.56 3.56A9.88 9.88 0 0 0 22 12.75z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Preview Mode</h3>
+                                      <p class="fs-xs mb-0">Save your cooking time with ease by quickly identifying orders with the same types of food.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="35" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M19 3H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zm0 2 .001 4H5V5h14zM5 11h8v8H5v-8zm10 8v-8h4.001l.001 8H15z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Intuitive Layout</h3>
+                                      <p class="fs-xs mb-0">Experience Intuitive Menu Placement with a Layout that Matches Your User Interface</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="m7 17.013 4.413-.015 9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583v4.43zM18.045 4.458l1.589 1.583-1.597 1.582-1.586-1.585 1.594-1.58zM9 13.417l6.03-5.973 1.586 1.586-6.029 5.971L9 15.006v-1.589z"></path><path d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Automated Description</h3>
+                                      <p class="fs-xs mb-0">
+                                          With our AI-generated descriptions, we can help your customers make informed and confident ordering decisions.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="32" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M16 2H8C4.691 2 2 4.691 2 8v13a1 1 0 0 0 1 1h13c3.309 0 6-2.691 6-6V8c0-3.309-2.691-6-6-6zm4 14c0 2.206-1.794 4-4 4H4V8c0-2.206 1.794-4 4-4h8c2.206 0 4 1.794 4 4v8z"></path><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Comment</h3>
+                                      <p class="fs-xs mb-0">Allow your customers to easily communicate their requests through comments.</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row row-cols-1 row-cols-sm-2 g-0">
+                              <div class="col d-flex align-items-center border-end-sm border-bottom p-3">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="50" viewBox="0 0 24 24" style="fill: rgba(153, 155, 175, 1);transform: ;msFilter:;"><path d="M4 11h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1zm1-6h4v4H5V5zm15-2h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm-1 6h-4V5h4v4zm-9 12a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6zm-5-6h4v4H5v-4zm13-1h-2v2h-2v2h2v2h2v-2h2v-2h-2z"></path></svg>
+                                  <div class="ps-2 ms-1">
+                                      <h3 class="h6 mb-0">Option menu </h3>
+                                      <p class="fs-xs mb-0">
+                                          With our system, you can easily distinguish options that require cooking and need immediate serving, as well as set menu options. This allows for a wide range of customizable choices.
+                                      </p>
+                                  </div>
+                              </div>
+                              <div class="col d-flex align-items-center border-bottom p-3">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+          <!-- What we offer -->
+      </div>
+      
+      
+
+      <!-- Features -->
+      <section class="container pb-5 mb-2 mb-md-4 mb-lg-5">
+        <h2 class="h1 text-center pt-1 pt-xl-2 mb-4">Why Choose Us?</h2>
+        <p class="fs-lg text-muted text-center pb-4 mb-2 mb-lg-3">We personalize how we work to fit your project needs. Our approach helps augment innovation.</p>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 pb-xl-3">
+          <div class="col text-center border-end">
+            <div class="card d-table border-0 rounded-circle shadow-sm p-3 mx-auto mb-4">
+              <img src="assets/img/services/icons/orderking/049-growth.svg" width="32" alt="Icon">
+            </div>
+            <h3 class="h5 mb-2 mb-lg-0">First 3 months is FREE</h3>
+          </div>
+          <div class="col text-center border-end">
+            <div class="card d-table border-0 rounded-circle shadow-sm p-3 mx-auto mb-4">
+                <img src="assets/img/services/icons/orderking/030-web design.svg" width="32" alt="Icon">
+            </div>
+            <h3 class="h5 mb-2 mb-lg-0">Easy menu setup</h3>
+          </div>
+          <div class="col text-center border-end">
+            <div class="card d-table border-0 rounded-circle shadow-sm p-3 mx-auto mb-4">
+                <img src="assets/img/services/icons/orderking/043-stopwatch.svg" width="32" alt="Icon">
+            </div>
+            <h3 class="h5 mb-2 mb-lg-0">Quick inquiry response within 24hrs</h3>
+          </div>
+          <div class="col text-center">
+            <div class="card d-table border-0 rounded-circle shadow-sm p-3 mx-auto mb-4">
+                <img src="assets/img/services/icons/orderking/018-strategy.svg" width="32" alt="Icon">
+            </div>
+            <h3 class="h5 mb-2 mb-lg-0">Do you need new function? We provide solution in just one week</h3>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Contact form -->
+      <section class="container">
+        <div class="bg-secondary rounded-3 py-5 px-3 px-sm-4 px-lg-0">
+          <div class="row align-items-center pt-1 pb-2 py-lg-4">
+            <div class="col-xl-4 col-lg-5 col-md-6 offset-lg-1 mb-4 pb-3 mb-md-0 pb-md-0">
+              <h2 class="h1 mb-lg-4">Get in Touch</h2>
+              <p class="pb-2 pb-md-4 pb-lg-5">To request a quote contact us directly or fill out the form and let us know how we can help.</p>
+            </div>
+            <div class="col-lg-5 col-md-6 offset-xl-1">
+              <div class="card border-0 shadow-sm p-sm-2">
+                  <h3 class="mb-lg-4 text-center ">Contact Info</h3>
+                  <ul class="list-unstyled pb-3 pb-md-4 pb-lg-5 mb-2">
+                      <li class="mb-2">
+                          <a href="tel:4065550120" class="nav-link d-flex align-items-center p-0">
+                              <i class="bx bx-phone-call fs-xl text-primary me-2"></i>
+                              (61) 423-378-887
+                          </a>
+                      </li>
+                      <li class="mb-2">
+                          <a href="mailto:orderking.corp@gmail.com" class="nav-link d-flex align-items-center p-0">
+                              <i class="bx bx-envelope fs-xl text-primary me-2"></i>
+                              orderking.corp@gmail.com
+                          </a>
+                      </li>
+                  </ul>
+                  <form class="input-group input-group-lg d-none d-sm-flex needs-validation mb-3" novalidate>
+                      <input type="email" id="emailaddress" class="form-control rounded-start ps-5" placeholder="Your email" required>
+                      <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                      <div class="invalid-tooltip position-absolute top-100 start-0">Please provide a valid email address.</div>
+                      <button class="btn btn-primary" id="contactusbtn1"  onclick="callAPIContactUS(document.getElementById('emailaddress').value)">Get in touch</button>
+                      <button type="button" id="contactusbtnspinner1" class="btn btn-primary pe-none" style="display: none;">
+                          <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          Sending...
+                      </button>
+                  </form>
+    
+                  <!-- Mobile form -->
+                  <form class="needs-validation d-sm-none mb-3" novalidate>
+                      <div class="position-relative mb-3">
+                          <input type="email" id="emailaddress-validate" class="form-control form-control-lg rounded-start ps-5" placeholder="Your email" required>
+                          <i class="bx bx-envelope fs-lg text-muted position-absolute top-50 start-0 translate-middle-y ms-3 zindex-5"></i>
+                          <div class="invalid-tooltip position-absolute top-0 start-0 mt-n4">Please provide a valid email address.</div>
+                      </div>
+                      <button class="btn btn-primary btn-lg w-100" id="contactusbtn2" onclick="callAPIContactUS(document.getElementById('emailaddress-validate').value)">Get in touch</button>
+                      <button type="button" id="contactusbtnspinner2" class="btn btn-primary pe-none" style="display: none;">
+                          <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                          Sending...
+                      </button>
+                  </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer dark-mode bg-dark pt-5 pb-4 pb-lg-5" style="margin-top: -150px;">
+      <div style="height: 158px;"></div>
+      <div class="container pt-lg-4">
+        <div class="row pb-5">
+          <div class="col-lg-4 col-md-6">
+            <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+                <img src="assets/img/logo.png" width="47" alt="OrderKing">
+              OrderKing
+            </div>
+            <p class="fs-sm text-light opacity-70 pb-lg-3 mb-4">Create happiness by developing innovative technologies and empowering our clients to achieve their goals and attain benefits.</p>
+          </div>
+          <div class="col-xl-6 col-lg-7 col-md-5 offset-xl-2 offset-md-1 pt-4 pt-md-1 pt-lg-0">
+            <div id="footer-links" class="row">
+              <div class="col-lg-4">
+                <h6 class="mb-2">
+                  <a href="#useful-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Useful Links</a>
+                </h6>
+                <div id="useful-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                    <ul class="nav flex-column pb-lg-1 mb-lg-3">
+                        <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">About Us</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Features</a></li>
+                    </ul>
+                    <!--ul class="nav flex-column mb-2 mb-lg-0">
+                        <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Terms &amp; Conditions</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link d-inline-block px-0 pt-1 pb-2">Privacy Policy</a></li>
+                    </ul-->
+                </div>
+              </div>
+              <!--div class="col-xl-4 col-lg-3">
+                <h6 class="mb-2">
+                  <a href="#social-links" class="d-block text-dark dropdown-toggle d-lg-none py-2" data-bs-toggle="collapse">Socials</a>
+                </h6>
+                <div id="social-links" class="collapse d-lg-block" data-bs-parent="#footer-links">
+                    <ul class="nav justify-content-center pt-3 pb-4 pb-lg-5">
+                        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="orderking-about.html" class="nav-link">About Us</a></li>
+                        <li class="nav-item"><a href="orderking-services.html" class="nav-link">Features</a></li>
+                    </ul>
+                </div>
+              </div-->
+              <div class="col-xl-4 col-lg-5 pt-2 pt-lg-0">
+                <h6 class="mb-2">Contact Us</h6>
+                <a href="mailto:orderking.corp@gmail.com" class="fw-medium">orderking.corp@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="nav d-block fs-xs text-center text-md-start pb-2 pb-lg-0 mb-0">
+          <span class="text-light opacity-50">&copy; All rights reserved. Made by </span>
+          <a class="nav-link d-inline-block p-0" href="https://www.sevenwhale.com" target="_blank" rel="noopener">SevenWhale</a>
+        </p>
+      </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/rellax/rellax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/js/src/components/jquery.min.js"></script>
+    <script src="assets/js/src/components/orderking.js"></script>
+    
+
+    <!-- Main Theme Script -->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>
