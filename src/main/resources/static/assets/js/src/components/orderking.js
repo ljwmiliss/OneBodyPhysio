@@ -12,7 +12,7 @@ var calculateFunc = (orders, costHours, openDays, servingTime, docket, POS)=>{
         return false;
     }
     var hours = (orders * servingTime * openDays) / 60 / 60;
-    var total = (((orders * servingTime * openDays) / 60 / 60 ) * costHours) + (docket * 12) + (POS * 12);
+    var total = (((orders * servingTime * openDays) / 60 / 60 ) * costHours) + (docket * 12) + ((POS - 100) * 12);
     var docket = (docket * 12) + (POS * 12);
     $("#caculateHours").html(hours.toFixed(2));
     $("#caculateResult").html(docket.toFixed(2));
