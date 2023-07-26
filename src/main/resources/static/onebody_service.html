@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>OneBodyPhysiotherapy</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template">
+    <meta name="keywords" content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" color="#6366f1" href="assets/favicon/safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="white">
+    <!-- Theme mode-->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== undefined && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+      
+      
+    </script>
+    <!-- Page loading styles-->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #121519;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #6f788b;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        background-color: #d7dde2; 
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        background-color: rgba(255,255,255,.25);
+      }
+      @-webkit-keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      @keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      
+    </style>
+    <!-- Page loading scripts-->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1500);
+        };
+      })();
+      
+    </script>
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font">
+    <!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="assets/vendor/fullcalendar/main.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+  </head>
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+        <header class="navbar navbar-expand-lg fixed-top">
+            <div class="container"><a class="navbar-brand pe-sm-3" href="index.html"><span class="text-info flex-shrink-0 me-2">
+            <img width="120" src="assets/img/onebody/logo.png"  alt="Image" >
+              </span></a>
+                <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+                    <input class="form-check-input" type="checkbox" id="theme-mode">
+                    <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+                    <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+                </div><a class="btn btn-info btn-sm fs-sm order-lg-3 d-none d-sm-inline-flex" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">Booking</a>
+                <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+                <nav class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
+                        <li class="nav-item "><a class="nav-link active" href="#" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                        </li>
+                        <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">About</a>
+                        </li>
+                        <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Service</a>
+                        </li>
+                        <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Activity</a>
+                        </li>
+                        <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Contacts</a>
+                        </li>
+                    </ul>
+                    <div class="d-sm-none p-3 mt-n3"><a class="btn btn-info w-100  mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">Booking</a></div>
+                </nav>
+            </div>
+        </header>
+      <!-- Page content-->
+      <!-- Hero slider-->
+      <!-- Classes (Tabs)-->
+      <section class="container pt-5 mt-lg-3 mt-xl-4 mt-xxl-5">
+        <h2 class="h1 text-center pt-2 pt-sm-3">Our services</h2>
+        <!-- Nav tabs-->
+        <ul class="nav nav-tabs flex-nowrap overflow-auto text-nowrap w-100 mx-auto pb-3 mb-3 mb-lg-4" role="tablist" style="max-width: 1105px;">
+          <li class="nav-item mb-0"><a class="nav-link active" href="#beginners" data-bs-toggle="tab" role="tab">Physiotherapy</a></li>
+          <li class="nav-item mb-0"><a class="nav-link" href="#stretching" data-bs-toggle="tab" role="tab">Medicare</a></li>
+          <li class="nav-item mb-0"><a class="nav-link" href="#fly-yoga" data-bs-toggle="tab" role="tab">Workers Compensation</a></li>
+          <li class="nav-item mb-0"><a class="nav-link" href="#for-pregnant" data-bs-toggle="tab" role="tab">Motor Vehicle Accidents</a></li>
+          <li class="nav-item mb-0"><a class="nav-link" href="#healthy-back" data-bs-toggle="tab" role="tab">Department of Veteran Affairs</a></li>
+        </ul>
+        <!-- Tab content-->
+        <div class="tab-content">
+          <!-- Beginers-->
+          <div class="tab-pane fade show active" id="beginners" role="tabpanel">
+            <div class="row align-items-lg-center">
+              <div class="col-md-6 pb-4 pb-md-0 mb-2 mb-md-0"><img class="rounded-5" src="assets/img/onebody/DSC08488.jpg" alt="Beginners"></div>
+              <div class="col-md-6 col-lg-5 col-xl-4 offset-lg-1">
+                <div class="ps-md-4 ps-lg-0">
+                  <h2 class="mb-xl-4">Physiotherapy</h2>
+                  <p class="pb-3 mb-3 mb-xl-4">At One Body Physiotherapy we provide the highest quality of care that is tailored to you. We
+                      want to get to know you as a person as we understand that everyone is unique with different
+                      lifestyles which may impact on your pain. Therefore, every session at One Body Physiotherapy
+                      you can expect 1-to-1, full 30 minutes with your experienced therapist where you can share your
+                      story and receive treatments from the following:</p>
+                  <div class="row row-cols-2 g-4 pb-2 pb-xl-0 mb-4 mb-xl-5">
+                    <div class="col"><i class="ai-sofa d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      
+                      <h3 class="h6 mb-2">Education</h3>
+                      <p class="fs-sm mb-0">Understand your pain, so you are in control</p>
+                    </div>
+                    <div class="col"><i class="ai-towel d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Exercise</h3>
+                      <p class="fs-sm mb-0">Precise exercises to fix and prevent the pain from returning</p>
+                    </div>
+                    <div class="col"><i class="ai-spa d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      
+                      <h3 class="h6 mb-2">Manual Therapy</h3>
+                      <p class="fs-sm mb-0">Hands-on treatment to manage your symptoms</p>
+                    </div>
+                    <div class="col">
+                        <i class="ai-flower d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                        
+                      <h3 class="h6 mb-2">Dry Needling</h3>
+                      <p class="fs-sm mb-0">Use of acupuncture needles to relax your muscles</p>
+                    </div>
+                  </div><a class="btn btn-primary w-100 w-sm-auto" href="#">Booking</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Stretching-->
+          <div class="tab-pane fade" id="stretching" role="tabpanel">
+            <div class="row align-items-lg-center">
+              <div class="col-md-6 pb-4 pb-md-0 mb-2 mb-md-0"><img class="rounded-5" src="assets/img/onebody/DSC08339.jpg" alt="Stretching"></div>
+              <div class="col-md-6 col-lg-5 col-xl-4 offset-lg-1">
+                <div class="ps-md-4 ps-lg-0">
+                  <h2 class="mb-xl-4">Medicare</h2>
+                  <p class="pb-3 mb-3 mb-xl-4">Chronic Disease Management (CDM) Program or previously known as Enhanced Primary Care
+                      (EPC) is a government funded program where if you have a chronic medical condition (minimum
+                      6 months), you may be eligible for Medicare rebates for your physiotherapy consultations, up to
+                      5 sessions. Speak to your General Practitioner (GP) to see if you are eligible and obtain a referral
+                      to One Body Physiotherapy.</p>
+                  <div class="row row-cols-2 g-4 pb-2 pb-xl-0 mb-4 mb-xl-5">
+                    <div class="col"><i class="ai-emoji-smile d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Who is eligible</h3>
+                      <p class="fs-sm mb-0">Patients with chronic medical condition that has been present for 6 months</p>
+                    </div>
+                    <div class="col"><i class="ai-rug d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Referral</h3>
+                      <p class="fs-sm mb-0">Obtain a CDM referral to One Body Physiotherapy from the GP then contact
+                          the clinic for an appointment</p>
+                    </div>
+                    <div class="col"><i class="ai-card d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Payment</h3>
+                      <p class="fs-sm mb-0">We bulk bill the Medicare rebate but there is a small out of pocket payment
+                          of $25 per visit</p>
+                    </div>
+                  </div><a class="btn btn-primary w-100 w-sm-auto" href="#">Booking</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Fly-yoga-->
+          <div class="tab-pane fade" id="fly-yoga" role="tabpanel">
+            <div class="row align-items-lg-center">
+              <div class="col-md-6 pb-4 pb-md-0 mb-2 mb-md-0"><img class="rounded-5" src="assets/img/onebody/DSC08518.jpg" alt="Fly-yoga"></div>
+              <div class="col-md-6 col-lg-5 col-xl-4 offset-lg-1">
+                <div class="ps-md-4 ps-lg-0">
+                  <h2 class="mb-xl-4">Workers Compensation</h2>
+                  <p class="pb-3 mb-3 mb-xl-4">If you have sustained an injury from your work or at your workplace, you may be eligible for
+                      physiotherapy services under WorkCover WA. One Body Physiotherapy will provide an effective
+                      treatment to swiftly fix your pain and for you to return to work confidently.</p>
+                  <div class="row row-cols-2 g-4 pb-2 pb-xl-0 mb-4 mb-xl-5">
+                    <div class="col"><i class="ai-emoji-smile d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Who is eligible</h3>
+                      <p class="fs-sm mb-0">Worker who has sustained a workplace injury</p>
+                    </div>
+                    <div class="col"><i class="ai-rug d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Referral</h3>
+                      <p class="fs-sm mb-0">GP referral letter/<br>
+                          Claim details (insurer name, claims number, case manager)</p>
+                    </div>
+                    <div class="col"><i class="ai-card d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Payment</h3>
+                      <p class="fs-sm mb-0">There is no out of pocket payment/<br>
+                          We will directly charge the insurer</p>
+                    </div>
+                  </div><a class="btn btn-primary w-100 w-sm-auto" href="#">Booking</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- For pregnant-->
+          <div class="tab-pane fade" id="for-pregnant" role="tabpanel">
+            <div class="row align-items-lg-center">
+              <div class="col-md-6 pb-4 pb-md-0 mb-2 mb-md-0"><img class="rounded-5" src="assets/img/onebody/DSC08588.jpg" alt="For pregnant"></div>
+              <div class="col-md-6 col-lg-5 col-xl-4 offset-lg-1">
+                <div class="ps-md-4 ps-lg-0">
+                  <h2 class="mb-xl-4">Motor Vehicle Accidents</h2>
+                  <p class="pb-3 mb-3 mb-xl-4">Patients who have sustained an injury from motor vehicle accident are eligible to receive
+                      physiotherapy services to help them return to pre-injury function. Compulsory Third Party (CTP)
+                      insurance will cover the cost of the services if you are eligible. Please refer to Insurance
+                      Commission of Western Australia <a href="https://www.icwa.wa.gov.au/motor-injury-
+                      insurance/claimsinformation/how-to-claim">(ICWA)</a> to start the claim process.</p>
+                  <div class="row row-cols-2 g-4 pb-2 pb-xl-0 mb-4 mb-xl-5">
+                    <div class="col"><i class="ai-emoji-smile d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Who is eligible</h3>
+                      <p class="fs-sm mb-0">Patient who has sustained an injury from motor vehicle accident</p>
+                    </div>
+                    <div class="col"><i class="ai-rug d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Referral</h3>
+                      <p class="fs-sm mb-0">GP referral letter/<br>
+                          ICWA claim details (claims number, case manager)</p>
+                    </div>
+                    <div class="col"><i class="ai-card d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Fees</h3>
+                      <p class="fs-sm mb-0">There is no out of pocket payment/<br>
+                          We will directly charge the insurer</p>
+                    </div>
+                  </div><a class="btn btn-primary w-100 w-sm-auto" href="#">Booking</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Healthy back-->
+          <div class="tab-pane fade" id="healthy-back" role="tabpanel">
+            <div class="row align-items-lg-center">
+              <div class="col-md-6 pb-4 pb-md-0 mb-2 mb-md-0"><img class="rounded-5" src="assets/img/onebody/DSC08262.jpg" alt="Healthy back"></div>
+              <div class="col-md-6 col-lg-5 col-xl-4 offset-lg-1">
+                <div class="ps-md-4 ps-lg-0">
+                  <h2 class="mb-xl-4">Department of Veteran Affairs</h2>
+                  <p class="pb-3 mb-3 mb-xl-4">Department of Veteran Affairs (DVA) card holders are eligible for physiotherapy services to
+                      manage their pain and to enhance their quality of life. General Practitioners (GP) can provide a
+                      referral for physiotherapy services up to 12 sessions each referral.</p>
+                  <div class="row row-cols-2 g-4 pb-2 pb-xl-0 mb-4 mb-xl-5">
+                    <div class="col"><i class="ai-emoji-smile d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Who is eligible</h3>
+                      <p class="fs-sm mb-0">DVA card (gold/white) holder</p>
+                    </div>
+                    <div class="col"><i class="ai-rug d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Referral</h3>
+                      <p class="fs-sm mb-0">GP referral for DVA physiotherapy treatment</p>
+                    </div>
+                    <div class="col"><i class="ai-card d-block h2 text-primary fw-normal pb-2 mb-1"></i>
+                      <h3 class="h6 mb-2">Payment</h3>
+                      <p class="fs-sm mb-0">There is no out of pocket payment<br>
+                          We will directly charge the DVA</p>
+                    </div>
+                  </div><a class="btn btn-primary w-100 w-sm-auto" href="#">Booking</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Relax yoga-->
+        </div>
+      </section>
+      <!-- Trainers (Grid)-->
+      <!-- Pricing-->
+      <!-- Instagram-->
+    </main>
+    <!-- Footer-->
+    <footer class="footer py-5">
+        <div class="container pt-md-2 pt-lg-3 pt-xl-4">
+            <div class="row pb-5 pt-sm-2 mb-lg-2">
+                <div class="col-md-12 col-lg-3 pb-2 pb-lg-0 mb-4 mb-lg-0"><a class="navbar-brand py-0 mb-3 mb-lg-4" href="index.html"><span class="text-info flex-shrink-0 me-2">
+                <img width="120" src="assets/img/onebody/logo.png"  alt="Image" ></span></a>
+                    <p class="fs-sm pb-2 pb-lg-3 mb-3"> One Body as part of a Global Body.
+                    
+                        As you receive treatment at One Body Physiotherapy.
+                    
+                        You help support someone in need in the Global Body</p>
+                </div>
+                <div class="col-sm-3 col-lg-2 offset-xl-1 mb-4 mb-sm-0">
+                    <ul class="nav flex-column">
+                        <li><a class="nav-link py-1 px-0" href="#">Home</a></li>
+                        <li><a class="nav-link py-1 px-0" href="#">About</a></li>
+                        <li><a class="nav-link py-1 px-0" href="#">Service</a></li>
+                        <li><a class="nav-link py-1 px-0" href="#">Activities</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-lg-2 mb-4 mb-sm-0">
+                    <ul class="nav flex-column">
+                        <li><a class="nav-link py-1 px-0" href="mailto:admin@onebodyphysio.com">admin@onebodyphysio.com</a></li>
+                        <li><a class="nav-link py-1 px-0" href="tel:08-9259-0102">08-9259-0102</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="fs-sm mb-0"><span class="opacity-70">&copy; All rights reserved. Made by </span><a class="nav-link d-inline fw-normal p-0" href="https://www.sevenwhale.com/" target="_blank" rel="noopener">Seven Whale</a></p>
+        </div>
+    </footer>
+    <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg><i class="ai-arrow-up"></i></a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+    <script src="assets/vendor/fullcalendar/main.min.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>

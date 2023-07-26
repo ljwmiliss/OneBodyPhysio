@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Around | About - Agency</title>
+    <!-- SEO Meta Tags-->
+    <meta name="description" content="Around - Multipurpose Bootstrap HTML Template">
+    <meta name="keywords" content="bootstrap, business, corporate, coworking space, services, creative agency, dashboard, e-commerce, mobile app showcase, saas, multipurpose, product landing, shop, software, ui kit, web studio, landing, dark mode, html5, css3, javascript, gallery, slider, touch, creative">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" color="#6366f1" href="assets/favicon/safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="white">
+    <!-- Theme mode-->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== undefined && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+      
+      
+    </script>
+    <!-- Page loading styles-->
+    <style>
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #121519;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #6f788b;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        background-color: #d7dde2; 
+        border-radius: 50%;
+        opacity: 0;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        background-color: rgba(255,255,255,.25);
+      }
+      @-webkit-keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      @keyframes spinner {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          -webkit-transform: none;
+          transform: none;
+        }
+      }
+      
+    </style>
+    <!-- Page loading scripts-->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1500);
+        };
+      })();
+      
+    </script>
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" id="google-font">
+    <!-- Vendor styles-->
+    <link rel="stylesheet" media="screen" href="assets/vendor/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="assets/vendor/lightgallery/css/lightgallery-bundle.min.css"/>
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="assets/css/theme.min.css">
+  </head>
+  <!-- Body-->
+  <body>
+    <!-- Page loading spinner-->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    <!-- Page wrapper-->
+    <main class="page-wrapper">
+      <div class="light-mode">
+        <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
+          <header class="navbar navbar-expand-lg fixed-top">
+              <div class="container"><a class="navbar-brand pe-sm-3" href="index.html"><span class="text-info flex-shrink-0 me-2">
+            <img width="120" src="assets/img/onebody/logo.png"  alt="Image" >
+              </span></a>
+                  <div class="form-check form-switch mode-switch order-lg-2 me-3 me-lg-4 ms-auto" data-bs-toggle="mode">
+                      <input class="form-check-input" type="checkbox" id="theme-mode">
+                      <label class="form-check-label" for="theme-mode"><i class="ai-sun fs-lg"></i></label>
+                      <label class="form-check-label" for="theme-mode"><i class="ai-moon fs-lg"></i></label>
+                  </div><a class="btn btn-info btn-sm fs-sm order-lg-3 d-none d-sm-inline-flex" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">Booking</a>
+                  <button class="navbar-toggler ms-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+                  <nav class="collapse navbar-collapse" id="navbarNav">
+                      <ul class="navbar-nav navbar-nav-scroll me-auto" style="--ar-scroll-height: 520px;">
+                          <li class="nav-item "><a class="nav-link active" href="#" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
+                          </li>
+                          <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">About</a>
+                          </li>
+                          <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Service</a>
+                          </li>
+                          <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Activity</a>
+                          </li>
+                          <li class="nav-item dropdown"><a class="nav-link " href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Contacts</a>
+                          </li>
+                      </ul>
+                      <div class="d-sm-none p-3 mt-n3"><a class="btn btn-info w-100  mb-1" href="https://themes.getbootstrap.com/product/around-multipurpose-template-ui-kit/" target="_blank" rel="noopener">Booking</a></div>
+                  </nav>
+              </div>
+          </header>
+      </div>
+      <!-- Page content-->
+      <!-- Hero-->
+        <section class="position-relative overflow-hidden pt-5">
+            <div class="container position-relative zindex-2 pt-4 pt-sm-5 mt-2 mt-sm-0 mt-md-2 mt-lg-3 mt-xl-4 mt-xxl-5">
+                <div class="row justify-content-center py-4">
+                    <div class="col-lg-11 col-xl-10  pb-2 pb-sm-3 mb-lg-2 mb-xl-3">
+                        <h1 class="display-2 pb-2 ">Our Mission</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+      <section class="bg-light position-relative ">
+        <div class="d-none position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(255,255,255, .02);"></div>
+        <div class="container  position-relative zindex-2 py-5 mb-4 mb-sm-5">
+          <div class="row pb-5 mb-2 mb-sm-0 mb-lg-3">
+            <div class="col-lg-10 col-xl-9">
+              <!-- Breadcrumb-->
+              <ul class=" d-flex flex-wrap mb-0">
+                <li class="d-flex py-1 me-4"><i class="ai-check-alt text-primary lead me-2"></i>At One Body Physiotherapy, we love to help people and we believe that we have been blessed to be
+                    able to give back to the people who are less fortunate around the world. We visit these people
+                    providing physiotherapy care and financial support on a yearly basis.</li>
+                <li class="d-flex py-1 me-4"><i class="ai-check-alt text-primary lead me-2"></i>You can participate with us on this mission as you receive treatment at One Body Physiotherapy, we
+                    will give a portion of your fee to someone around the world who are in need. Read the stories (link)
+                    of the people you have helped.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- About-->
+      <section class="container position-relative zindex-3" style="margin-top: -135px;">
+        <div class="rounded-5 overflow-hidden"> 
+          <div class="jarallax ratio ratio-16x9" data-jarallax data-speed="0.6">
+            <div class="jarallax-img" style="background-image: url(assets/img/onebody/DSC08802.jpg);"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer-->
+    <footer class="footer py-5">
+        <div class="container pt-md-2 pt-lg-3 pt-xl-4">
+            <div class="row pb-5 pt-sm-2 mb-lg-2">
+                <div class="col-md-12 col-lg-3 pb-2 pb-lg-0 mb-4 mb-lg-0"><a class="navbar-brand py-0 mb-3 mb-lg-4" href="index.html"><span class="text-info flex-shrink-0 me-2">
+                <img width="120" src="assets/img/onebody/logo.png"  alt="Image" ></span></a>
+                    <p class="fs-sm pb-2 pb-lg-3 mb-3"> One Body as part of a Global Body.
+                    
+                        As you receive treatment at One Body Physiotherapy.
+                    
+                        You help support someone in need in the Global Body</p>
+                </div>
+                <div class="col-sm-3 col-lg-2 offset-xl-1 mb-4 mb-sm-0">
+                    <ul class="nav flex-column">
+                        <li><a class="nav-link py-1 px-0" href="#">Home</a></li>
+                        <li><a class="nav-link py-1 px-0" href="#">About</a></li>
+                        <li><a class="nav-link py-1 px-0" href="#">Service</a></li>
+                        <li><a class="nav-link py-1 px-0" href="#">Activities</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-lg-2 mb-4 mb-sm-0">
+                    <ul class="nav flex-column">
+                        <li><a class="nav-link py-1 px-0" href="mailto:admin@onebodyphysio.com">admin@onebodyphysio.com</a></li>
+                        <li><a class="nav-link py-1 px-0" href="tel:08-9259-0102">08-9259-0102</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="fs-sm mb-0"><span class="opacity-70">&copy; All rights reserved. Made by </span><a class="nav-link d-inline fw-normal p-0" href="https://www.sevenwhale.com/" target="_blank" rel="noopener">Seven Whale</a></p>
+        </div>
+    </footer>
+    <!-- Back to top button--><a class="btn-scroll-top" href="#top" data-scroll>
+      <svg viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"></circle>
+      </svg><i class="ai-arrow-up"></i></a>
+    <!-- Vendor scripts: js libraries and plugins-->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="assets/vendor/jarallax/dist/jarallax.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
+    <!-- Main theme script-->
+    <script src="assets/js/theme.min.js"></script>
+  </body>
+</html>
